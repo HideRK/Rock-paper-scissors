@@ -9,8 +9,8 @@ using namespace std;
 
 class human {
 private:
-	string name;
-	int point;
+	string name = "";
+	int point = 0;
 public:
 	void Defname(string str) { name = str; }
 	void Defpoint(int num) { point = num; }
