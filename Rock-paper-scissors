@@ -1,0 +1,90 @@
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<vector>
+#include<stdlib.h>
+#include<time.h>
+
+using namespace std;
+
+class human {
+private:
+	string name;
+	int point;
+public:
+	void Defname(string str) { name = str; }
+	void Defpoint(int num) { point = num; }
+	string Readname() { return name; }
+	int Readpoint() { return point; }
+};
+
+int main() {
+	int vsize = 0;
+	cout << "Please enter your name. Enter end when finished."<< endl;
+	string fname;
+	vector<string> v1;
+	while (1) {
+		cout << vsize + 1 << " : ";
+		cin >> fname;
+		if (fname == "end") { break; }
+		v1.push_back(fname);
+		vsize++;
+	}
+
+	cout << endl << "( If you make input error, the program will end!! )" << endl
+		<< "Play rock-paper-scissors with computer. How many times do you want to do it?" << endl;
+	int m;
+	cin >> m;
+	cout << endl << "( rock = 1, scissors = 2, paper = 3 )" << endl 
+		<< "( win : 2points, lose : -1point, draw : 0 points )"<< endl << endl;
+
+	vector<int> v2(vsize);
+	for (int i = 0; i <= vsize - 1 ; i++) {
+		v2[i] = 0;
+	}
+	for (int n = 1; n <= m; n++) {
+		cout << "Point" << endl;
+		int j = 0;
+		for (auto i = v2.begin(); i != v2.end(); i++) {
+			cout << v1[j] << " : " << *i << "  ";
+			j++;
+		}
+		cout << endl << endl << endl;
+
+		for (int i = 0; i <= vsize - 1 ; i++) {
+			int random;
+			srand((unsigned)time(NULL));
+			random = rand() % 3 + 1;
+
+			int Nin;
+			cout << "  " << v1[i] << " : ";
+			cin >> Nin;
+			if (Nin == 1 || Nin == 2 || Nin == 3) { ; }
+			else { 
+				cout << "  The input is incorrect!" << endl;
+				exit(0);
+			}
+
+			cout << "  " <<  "Computer : " << random << endl << endl;
+			if (Nin - random == -1 || Nin - random == 2) {
+				v2[i] = v2[i] + 2;
+			}
+			if (Nin == random) { ; }
+			if (Nin - random == 1 || Nin - random == -2) {
+				v2[i] = v2[i] - 1;
+			}
+		}
+		
+	}
+	
+	human* obj = new human[vsize];
+	for (int k = 0; k < vsize; k++) {
+		obj[k].Defname(v1[k]);
+		obj[k].Defpoint(v2[k]);
+	}
+
+	cout << endl << "Total point" << endl;
+	for (int k = 0; k < vsize; k++) {
+		cout << "  " <<obj[k].Readname() << " : " << obj[k].Readpoint() << endl;
+	}
+}
