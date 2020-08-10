@@ -61,7 +61,6 @@ int main() {
 			cin >> Nin;
 			if (Nin == 1 || Nin == 2 || Nin == 3) { ; }
 			else { 
-				cout << "  The input is incorrect!" << endl;
 				exit(0);
 			}
 
